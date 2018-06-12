@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styles from './Hangman.css';
 import gallows from '../../images/gallows.png';
 import one from '../../images/one.png';
@@ -9,16 +10,22 @@ import five from '../../images/five.png';
 import full from '../../images/full.png';
 
 export default class Hangman extends PureComponent {
+  static propTypes = {
+    missesCount: PropTypes.number
+  };
+
   render() {
+    const { missesCount } = this.props;
+
     return (
       <section className={styles.hangman}>
-        {/* <img src={gallows}/>
-        <img src={one}/>
-        <img src={two}/>
-        <img src={three}/>
-        <img src={four}/>
-        <img src={five}/> */}
-        <img src={full}/>
+        {!!missesCount || <img src={gallows}/>}
+        {!!(missesCount === 1) && <img src={one}/>}
+        {!!(missesCount === 2) && <img src={two}/>}
+        {!!(missesCount === 3) && <img src={three}/>}
+        {!!(missesCount === 4) && <img src={four}/>}
+        {!!(missesCount === 5) && <img src={five}/>}
+        {!!(missesCount === 6) && <img src={full}/>}
       </section>
     );
   }
